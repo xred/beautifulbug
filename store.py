@@ -9,12 +9,15 @@ import os
 import time
 import json
 
+DIR = "./rules/"
+SUFFIX = ".rules"
+
 def list_rules():
-	rules_list = os.listdir("./rules");
-	print rules_list
+	rules_list = os.listdir(DIR);
+	return rules_list
 
 def read_rule(rule_name):
-	fp = open(rule_name,"r");
+	fp = open(DIR+rule_name,"r");
 	rule_content = fp.read()
 	rule_obj = json.loads(rule_content)
 	return rule_obj
@@ -27,15 +30,12 @@ def add_rule(rule_name,url,selector):
 	rule_obj = dict()
 	rule_obj['url'] = url
 	rule_obj['selector'] = selector
-	fp = open(rule_name,"w+")
+	rule_obj['name'] = rule_name
+	print DIR+rule_name+SUFFIX
+	fp = open(DIR+rule_name+SUFFIX,"w+")
 	rule_content = json.dumps(rule_obj)
 	fp.write(rule_content)
 	fp.close()
 
-add_rule("./rules/google.rules","http://google.com","div>body")
-
-
-# read_rule("./rules/baidu.rules")
-# delete_rule("./rules/google.rules")
-
-time.sleep(10)
+# add_rule("wandoujia","http://www.wandoujia.com/apps/com.secretlisa.beidanci","body > div.container > div.detail-wrap > div.detail-top.clearfix > div.num-list > span:nth-child(1) > i");
+# add_rule("XLB","https://www.mintpal.com/market/XLB/BTC","#spanLastPrice")

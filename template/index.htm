@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Beautiful Bug</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Info</th>
+            </tr>
+            {% for item in items %}
+                <tr>
+                    <td>{{ escape(item['name']) }}</td>
+                    <td>{{ escape(item['info']) }}</td>
+                </tr>
+            {% end %}
+        </table>
+    </body>
+</html>
