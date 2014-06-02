@@ -26,11 +26,12 @@ def delete_rule(rule_name):
 	os.remove(rule_name)
 	return 1
 
-def add_rule(rule_name,url,selector):
+def add_rule(rule_name,url,selector,cookie):
 	rule_obj = dict()
 	rule_obj['url'] = url
 	rule_obj['selector'] = selector
 	rule_obj['name'] = rule_name
+	rule_obj['cookie'] = cookie
 	print DIR+rule_name+SUFFIX
 	fp = open(DIR+rule_name+SUFFIX,"w+")
 	rule_content = json.dumps(rule_obj)
