@@ -8,7 +8,7 @@ import requests
 from pyquery import PyQuery as pq
 
 
-def beautifulBug(url,selector,name):
+def beautifulBug(url,selector,name,cookie):
     result = dict();
     try:
         headers = {
@@ -18,9 +18,10 @@ def beautifulBug(url,selector,name):
             'Cache-Control':'no-cache',
             'Connection':'keep-alive',
             'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.132 Safari/537.36',
-            'Pragma':'no-cache',
-            'Cookie':'__cfduid=d89d38faf312501122304036416165dee1395979292408; __utma=264820115.202194311.1395979293.1399386482.1399535755.25; __utmz=264820115.1395979293.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); session_id=dkngoiv0njhbsts4ao7mkbh0i7; visid_incap_152969=x4nEeWfATBiAaxIVJhRoktyJiFMAAAAAQUIPAAAAAAAkzhq+qaIvmKasjRKukbQr; MintPal=thc7r66ugdd97r8i6a8gfu3763; visid_incap_152968=W5SOr0tcS+e5Uy2+xCsSSSz1flMAAAAAQUIPAAAAAABcrHXjSntyYOgd2SeyiWvE; incap_ses_200_152968=bWqHBoLpUAAZQZWqE4vGAqeriVMAAAAAPL3Tg4aeJLWyUQ0v3y6o+w=='
+            'Pragma':'no-cache'
         }
+        if cookie != "":
+            headers['cookie'] = cookie
         r = requests.get(url,headers=headers)
         d = pq(r.content)
         info = d(selector)
