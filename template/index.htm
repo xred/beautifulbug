@@ -2,17 +2,35 @@
     <head>
         <title>Beautiful Bug</title>
         <meta charset="UTF-8" />
+        <script src="/statics/jquery.js"></script>
+        <script>
+            function get_new_info(obj){
+                var data_name = obj.attr("data");
+                url = "/api/"+data_name;
+                $.get(url,function(result){
+                    $($(obj.parent("td").siblings()[1])).html(result);
+                })
+            }
+
+            $(document).ready(function(){
+                $(".update").click(function(){
+                    get_new_info($(this))
+                })
+            })
+        </script>
     </head>
     <body>
         <table>
             <tr>
                 <th>Name</th>
                 <th>Info</th>
+                <th>update</th>
             </tr>
             {% for item in items %}
                 <tr>
-                    <td>{{ escape(item['name']) }}</td>
-                    <td>{{ escape(item['info']) }}</td>
+                    <td class="name">{{ escape(item['name']) }}</td>
+                    <td class="info">{{ escape(item['info']) }}</td>
+                    <td><span class="update" data="{{ escape(item['name'])}}">Update</span></td>
                 </tr>
             {% end %}
         </table>

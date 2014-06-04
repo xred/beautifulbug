@@ -22,6 +22,12 @@ def read_rule(rule_name):
 	rule_obj = json.loads(rule_content)
 	return rule_obj
 
+def get_rule(rule_name):
+	fp = open(DIR+rule_name+SUFFIX,"r");
+	rule_content = fp.read()
+	rule_obj = json.loads(rule_content)
+	return rule_obj
+
 def delete_rule(rule_name):
 	try:
 		os.remove(DIR+rule_name+SUFFIX)
