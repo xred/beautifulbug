@@ -3,6 +3,10 @@
         <title>Beautiful Bug</title>
         <meta charset="UTF-8" />
         <script src="/statics/jquery.js"></script>
+        <script src="/statics/dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/statics/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/statics/dist/css/bootstrap-theme.min.css" />
+
         <script>
             function get_new_info(obj){
                 var data_name = obj.attr("data");
@@ -11,30 +15,37 @@
                     $($(obj.parent("td").siblings()[1])).html(result);
                 })
             }
-
+    
             $(document).ready(function(){
                 $(".update").click(function(){
+                    $($(this).parent("td").siblings()[1]).html("Loading");
                     get_new_info($(this))
                 })
             })
         </script>
     </head>
     <body>
-        <table>
+        <table class="table-striped table table-responsive">
+        <thead>
             <tr>
                 <th>Name</th>
                 <th>Info</th>
                 <th>Update</th>
                 <th>Delete</th>
+                <th>Goto</th>
             </tr>
+        </thead>
+        <tbody>
             {% for item in items %}
                 <tr>
                     <td class="name">{{ escape(item['name']) }}</td>
                     <td class="info">{{ escape(item['info']) }}</td>
-                    <td><a class="update" data="{{ escape(item['name'])}}">Update</a></td>
+                    <td><a class="update" data="{{ escape(item['name']) }}">Update</a></td>
                     <td><a href="/remove/{{ escape(item['name']) }}">Delete</a></td>
+                    <td><a href="{{ escape(item['url']) }}" target="_blank">Goto</a></td>
                 </tr>
             {% end %}
+        </tbody>
         </table>
     </body>
 </html>

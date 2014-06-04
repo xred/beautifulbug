@@ -1,15 +1,35 @@
 <html>
-    
-<header>
-    <meta charset="UTF-8" />
-</header>
-<form action="/add/" method="POST">
-    name:<input type="text" name="name" /><br>
-    url:<input type="text" name="url"><br>
-    selector:<input type="text" name="selector" /><br>
-    cookie:<input type="text" name="cookie" /><br>
-    {% raw xsrf_form_html() %}
-    <input type="submit">
-</form>
+    <head>
+        <title>Beautiful Bug</title>
+        <script src="/statics/jquery.js"></script>
+        <script src="/statics/dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/statics/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/statics/dist/css/bootstrap-theme.min.css" />
 
+        <script>
+            function get_new_info(obj){
+                var data_name = obj.attr("data");
+                url = "/api/"+data_name;
+                $.get(url,function(result){
+                    $($(obj.parent("td").siblings()[1])).html(result);
+                })
+            }
+
+            $(document).ready(function(){
+                $(".update").click(function(){
+                    get_new_info($(this))
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <form action="/add/" method="POST" class="form-horizontal">
+            name:<input type="text" name="name" class="form-control"/><br>
+            url:<input type="text" name="url" class="form-control"><br>
+            selector:<input type="text" name="selector" class="form-control"/><br>
+            cookie:<input type="text" name="cookie" class="form-control"/><br>
+            {% raw xsrf_form_html() %}
+            <input type="submit">
+        </form>
+    </body>
 </html>
