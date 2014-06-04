@@ -25,7 +25,7 @@ def beautifulBug(url,selector,name,cookie):
         r = requests.get(url,headers=headers)
         d = pq(r.content)
         info = d(selector)
-        info = info.text()
+        info = info.eq(0).text()
         if info == "":
             info = "error"
         result['name'] = name

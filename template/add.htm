@@ -1,7 +1,15 @@
+<html>
+    
+<header>
+    <meta charset="UTF-8" />
+</header>
 <form action="/add/" method="POST">
     name:<input type="text" name="name" /><br>
     url:<input type="text" name="url"><br>
     selector:<input type="text" name="selector" /><br>
     cookie:<input type="text" name="cookie" /><br>
+    {% raw xsrf_form_html() %}
     <input type="submit">
 </form>
+
+</html>

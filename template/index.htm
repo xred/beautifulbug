@@ -24,13 +24,15 @@
             <tr>
                 <th>Name</th>
                 <th>Info</th>
-                <th>update</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
             {% for item in items %}
                 <tr>
                     <td class="name">{{ escape(item['name']) }}</td>
                     <td class="info">{{ escape(item['info']) }}</td>
-                    <td><span class="update" data="{{ escape(item['name'])}}">Update</span></td>
+                    <td><a class="update" data="{{ escape(item['name'])}}">Update</a></td>
+                    <td><a href="/remove/{{ escape(item['name']) }}">Delete</a></td>
                 </tr>
             {% end %}
         </table>

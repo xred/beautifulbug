@@ -1,4 +1,5 @@
 <form action="/remove/" method="POST">
+{% raw xsrf_form_html() %}
     name:<input type="text" name="name" value="{{ escape(remove_info) }}" /><br>
     <input type="submit">
 </form>
