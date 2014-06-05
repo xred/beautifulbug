@@ -22,7 +22,7 @@ def beautifulBug(url,selector,name,cookie):
         }
         if cookie != "":
             headers['cookie'] = cookie
-        r = requests.get(url,headers=headers,timeout=5)
+        r = requests.get(url,headers=headers,timeout=5,verify=False)
         d = pq(r.content)
         info = d(selector)
         info = info.eq(0).text()
@@ -34,5 +34,9 @@ def beautifulBug(url,selector,name,cookie):
         result['info']  = info
         return result
     except Exception, e:
-        return "error"
+        result['name'] = name
+        result['url'] = url
+        result['selector'] = selector
+        result['info']  = e
+        return result
 

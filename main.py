@@ -27,7 +27,8 @@ class MainHandler(tornado.web.RequestHandler):
                 cookie = rule_obj['cookie']
             else:
                 cookie = "";
-            result_obj = testbug.beautifulBug(  url, selector, name,cookie)
+            rule_obj['info'] = 'Loading'
+            result_obj = rule_obj
             resut_array.append(result_obj)
         self.render("./template/index.htm",items = resut_array)
 
@@ -65,6 +66,7 @@ def read_info(api_info):
     else:
         cookie = "";
     result_obj = testbug.beautifulBug(  url, selector, name,cookie)
+    print result_obj
     return result_obj['info']
 
 settings = {
